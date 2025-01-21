@@ -2,10 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Reset default margin/padding for body and html */
+html, body {
+    @apply h-full m-0 p-0;
+    overflow-x: hidden; /* Prevent horizontal overflow */
+    scroll-behavior: smooth;
+}
+
 header ul li {
     @apply px-2;
 }
 
+/* Primary and Secondary Background Colors */
 .bg-primary {
     background: rgb(85 81 227);
 }
@@ -14,22 +22,95 @@ header ul li {
     background: #2b2d77;
 }
 
+/* Mobile Navigation Fix */
 .mobile-nav {
-    @apply fixed top-10 left-0 bg-gray-800 w-full h-1/4  ;
+    @apply fixed top-0 left-0 bg-gray-800 w-full h-auto md:hidden; /* Make sure it's visible only on mobile */
 }
 
 .mobile-nav li {
-    @apply w-full h-full text-center border-b-2 ;
+    @apply w-full h-full text-center border-b-2 py-3;
 }
 
+/* Project Description Fix */
 .project-desc {
     @apply absolute left-0 right-0 bottom-0 top-0 bg-secondary opacity-0 duration-500 hover:opacity-100;
+    @apply flex justify-center items-center p-4; /* Make sure content is properly aligned */
 }
 
+/* Button Styling */
 .btn {
     @apply bg-primary px-5 py-2 font-bold hover:border-2 border-white rounded;
 }
 
-html {
-    scroll-behavior: smooth;
+/* General Styles for Body */
+body {
+    @apply bg-gray-100;
+}
+
+.App {
+    @apply flex flex-col min-h-screen;
+}
+
+/* Ensure all images are responsive */
+img {
+    @apply max-w-full h-auto;
+}
+
+/* Flex Settings for Section Layout */
+section {
+    @apply w-full flex flex-col md:flex-row px-5 py-8;
+}
+
+/* Adjust the Resume Image and other content for mobile */
+@media (max-width: 640px) {
+    .project-desc {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(43, 45, 119, 0.7);
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .project-desc:hover {
+        opacity: 1;
+    }
+
+    /* Adjust padding and alignment for mobile devices */
+    section {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    /* Ensure elements like text and images do not overflow */
+    .project-desc p {
+        text-align: center;
+        font-size: 16px;
+    }
+
+    .project-desc a {
+        font-size: 18px;
+        padding: 8px 12px;
+    }
+}
+
+/* Make the mobile navigation full-width and adjust layout */
+@media (max-width: 768px) {
+    header {
+        @apply flex justify-between items-center px-4 py-3;
+    }
+
+    .mobile-nav {
+        @apply block;
+    }
+
+    .project-desc {
+        @apply absolute flex justify-center items-center p-5;
+    }
+
+    .btn {
+        @apply py-2 px-4 text-sm;
+    }
 }
